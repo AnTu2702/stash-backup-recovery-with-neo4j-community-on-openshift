@@ -1,3 +1,6 @@
+Repository refers to the following video on youtube:
+https://www.youtube.com/watch?v=SJafvdWHAhg
+
 - appscode/stash for Kubernetes applied restic backup to your cluster:
 
   https://appscode.com/products/stash/0.7.0/concepts/
