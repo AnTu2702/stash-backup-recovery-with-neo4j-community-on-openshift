@@ -1,0 +1,26 @@
+apiVersion: stash.appscode.com/v1alpha1
+kind: Recovery
+metadata:
+  name: neo4j
+  namespace: myproject
+spec:
+  backend:
+    s3:
+      bucket: neo4j-stash-eval-s3-bucket
+      endpoint: s3-eu-central-1.amazonaws.com
+      prefix: neo4j-backup-repository
+    storageSecretName: s3-secret
+  paths:
+  - /data/databases
+  recoveredVolumes:
+  - mountPath: /data
+    persistentVolumeClaim:
+      claimName: neo4j-data
+  repository:
+    name: replicationcontroller.neo4j-2
+    namespace: myproject
+  snapshot: replicationcontroller.neo4j-2-8e9f1403
+  type: offline
+  workload:
+    kind: ReplicationController
+    name: neo4j-2

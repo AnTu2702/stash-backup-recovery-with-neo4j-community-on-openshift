@@ -1,0 +1,30 @@
+apiVersion: stash.appscode.com/v1alpha1
+kind: Restic
+metadata:
+  name: neo4j
+  namespace: myproject
+spec:
+  selector:
+    matchLabels:
+      app: neo4j
+  type: offline
+  fileGroups:
+  - path: /data/dbms
+    retentionPolicyName: 'keep-last-5'
+  - path: /data/databases
+    retentionPolicyName: 'keep-last-5'
+  backend:
+    s3:
+      endpoint: 's3-eu-central-1.amazonaws.com'
+      bucket: neo4j-stash-eval-s3-bucket
+      prefix: neo4j-backup-repository
+    storageSecretName: s3-secret
+  schedule: '@every 2m'
+  volumeMounts:
+  - mountPath: /data
+    name: neo4j-data
+  retentionPolicies:
+  - name: 'keep-last-5'
+    keepLast: 5
+    prune: true
+
