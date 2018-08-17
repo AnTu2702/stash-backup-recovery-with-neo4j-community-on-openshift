@@ -211,7 +211,7 @@ https://www.youtube.com/watch?v=SJafvdWHAhg
 
   recovery:
   ```
-  oc get recovery
+  oc describe recovery
 
   Name:         neo4j
   Namespace:    myproject
